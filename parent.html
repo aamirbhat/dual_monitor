@@ -90,10 +90,15 @@ function testing(link) {  // This is VERSION 2, WORKS GREAT ON IE
     testwindow.resizeTo(testwindow.screen.width,testwindow.screen.height)
     }
     else {
-    	 testwindow = window.open(link, "Testing", "width=100%, height=100%, left=1367, resizable=yes, scrollbars=yes")
-    testwindow.moveTo(screen.width, 0);
+    left = screen.width;
+    testwindow = window.open(link, "Testing", "width=100%, height=100%, left=" + left + ", resizable=yes, scrollbars=yes")
+    testwindow.moveTo(screen.width + 1, 0);
+    testwindow.focus();
+    testwindow.resizeTo(this.innerWidth, this.innerHeight);
+    testwindow.resizeBy(testwindow.screen.width, testwindow.screen.height);
     
-    } 
+    }
+ 
     testwindow.focus();
 
      
