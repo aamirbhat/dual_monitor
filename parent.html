@@ -16,45 +16,55 @@
 <body>
 <main>
     <div>
+    	<h6>
+    		There are 3 version of the script, each version works best for each of the browser Firefox, IE and Chrome. 
+    		Each version is appropriately represented on the buttons below.
+    	    <ul>
+    	    	<li>Version 1 : Works best on Firefox, tested on version 62.0.2</li>
+    	    	<li>Version 2 : Works best on Internet Explorer, tested on version 11.0.9600.19129 </li>
+    	    	<li>Version 3 : Works best on Chrome,tested on version 69.0.3497</li>
+    	    </ul>
+    	</h6>
+    </div>
+    <div>
 	<button type="button" onclick="handleWindow()">New Window (V1)</button>
 	</div>
-	<!-- This is the test div, for demo purpose -->
+	<!-- This is the test div, remove it after testing -->
 	<div class="container">
 		<div class="container inner">
 		    <button class="btn btn-sm btn-success enlarge" onclick="testing(document.getElementById('target1').src)">Enlarge (v2)</button>
-            <button class="btn btn-sm btn-success enlarge" onclick="handlePresentation(document.getElementById('target1').src)">Enlarge (v3)</button>
+   <button class="btn btn-sm btn-success enlarge" onclick="handlePresentation(document.getElementById('target1').src)">Enlarge (v3)</button>
 			<iframe id="target1" src="https://www.getbootstrap.com"></iframe>
 		</div>
 		<div class="container inner">
 		    <button class="btn btn-sm btn-success enlarge" onclick="testing(document.getElementById('target2').src)">Enlarge (v2)</button>
-             <button class="btn btn-sm btn-success enlarge" onclick="handlePresentation(document.getElementById('target2').src)">Enlarge (v3)</button>
+    <button class="btn btn-sm btn-success enlarge" onclick="handlePresentation(document.getElementById('target2').src)">Enlarge (v3)</button>
 			<iframe id="target2" src="https://www.getbootstrap.com/docs/4.1/components/navs/"></iframe>
 		</div>
 		<div class="container inner">
 		    <button class="btn btn-sm btn-success enlarge" onclick="testing(document.getElementById('target3').src)">Enlarge (v2)</button>
-              <button class="btn btn-sm btn-success enlarge" onclick="handlePresentation(document.getElementById('target3').src)">Enlarge (v3)</button>
+    <button class="btn btn-sm btn-success enlarge" onclick="handlePresentation(document.getElementById('target3').src)">Enlarge (v3)</button>
 			<iframe id="target3" src="https://www.getbootstrap.com/docs/4.1/getting-started/introduction/"></iframe>
 		</div>
 	</div>
 </main>
 <script>
 var mywindow
-// handler for version without enhancements...
-function handleWindow(link) {
-	// Firefox ... 
+function handleWindow(link) { // This is VERSION 1, WORKS GREAT ON FIREFOX
+	// Firefox
 	if(navigator.userAgent.indexOf("Firefox") != -1) {
 		mywindow = window.open("child.html", "Child Window", "width=100%, height=100%, menubar=yes, scrollbars=yes, toolbar=yes, resizable=yes")
 		mywindow.moveTo(screen.width+1, 0);
 	    mywindow.focus();
 	}
-	// Internet Explorer 
+	// Internet Explorer
 	else if((navigator.userAgent.indexOf("MSIE") != -1) || (!!document.documentMode == true)) {
 		myleft = screen.width
 	    mywindow =window.open("child.html", "Child Window", " width=100%, height=100%, left=" + myleft + ", menubar=yes, toolbar=yes, scrollbars=yes, resizable=yes")
 	    mywindow.moveTo(screen.width+1, 0);
 	    mywindow.focus();   
 	}
-	// Other browsers,
+	// Other browsers, Chrome
 	else {
 		myleft = screen.width
 		mywindow = window.open("child.html", "Child Window", "width=100%, height=100%, left=" + myleft + ",resizable=yes, menubar=yes, toolbar=yes, scrollbars=yes")
@@ -62,46 +72,47 @@ function handleWindow(link) {
 	    mywindow.focus();
 	}
 }
-// this is the testing function...for enhanced version...
-function testing(link) {
+function testing(link) {  // This is VERSION 2, WORKS GREAT ON IE
     var testwindow
     if(navigator.userAgent.indexOf("Firefox") != -1) {
-    testwindow = window.open(link, "Testing", "width=2000, height=1500, resizable=yes, scrollbars=yes")
+    testwindow = window.open(link, "Testing", "width=100%, height=100%, resizable=yes, scrollbars=yes")
     testwindow.moveTo(screen.width+1, 0)
-    testwindow.focus()
-    testwindow.resizeTo(testwindow.screen.width, testwindow.screen.height)
+    testwindow.focus();
+    testwindow.resizeTo(testwindow.screen.width, testwindow.screen.height);
+    //testwindow.resizeBy(testwindow.screen.width, testwindow.screen.height);
     }
-    // this block works nice on Internet explorer.... so child addition for Internet explorer can be removed...
     else if((navigator.userAgent.indexOf("MSIE") != -1) || (!!document.documentMode == true)) {
 
-    testwindow = window.open(link, "Testing", "width=8000, height=1500, left=1366, resizable=yes, scrollbars=yes")
+    left = screen.width;
+    testwindow = window.open(link, "Testing", "width=8000, height=1500, left= " + left + ", resizable=yes, scrollbars=yes")
     testwindow.moveTo(screen.width+1, 0)
     testwindow.focus()
     testwindow.resizeTo(testwindow.screen.width,testwindow.screen.height)
     }
     else {
     	 testwindow = window.open(link, "Testing", "width=100%, height=100%, left=1367, resizable=yes, scrollbars=yes")
-    testwindow.moveTo(screen.width+1, 0)
-    testwindow.focus()
-    testwindow.resizeTo(testwindow.innerWidth,testwindow.innerHeight)
-    testwindow.resizeBy(testwindow.screen.width, testwindow.screen.height)
-
+    testwindow.moveTo(screen.width, 0);
+    
     } 
-    
-    
-    
+    testwindow.focus();
+
+     
 } // function testing ends here
 
-function handlePresentation(link) {
-// this is the enhanced version 3 of the code. It uses the Presentation API.
-// Works great on Chrome... 
-// For Firefox we need to first manually enable the API in about:config at following points:
-// dom.presentation.enabled and dom.presentation.controller.enabled should both be true
+function handlePresentation(link) {  // This is VERSION 3, WORKS BEST ON CHROME
+	// this the enhanced version 2 code. It uses the Presentation API.
+	// For firefox dom.presentation.controller.enaled and dom.presentation.enabled should be true
 
-var request = new PresentationRequest(link)
-request.start()
+    if(navigator.userAgent.indexOf("Firefox") != -1) {
+    	var request = new PresentationRequest(link)
+    	request.start().then(PresentationConnection())
 
-} // function handlePresentation ends here
+    }
+    else {
+	var request = new PresentationRequest(link)
+	request.start()
+    }
+}
 </script>
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
